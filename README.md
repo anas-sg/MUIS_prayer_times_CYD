@@ -2,7 +2,9 @@
 
 Display the local date, time and MUIS prayer times on an [ESP32 CYD](https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display)
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/yT5R_Q9c7Bg?si=blqn8eUEw2HxQvJa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" align="center" allowfullscreen></iframe>
+## Demo
+**Click on the thumbnail to view the YouTube video:**
+[![MUIS Prayer Times Display on ESP32 CYD](https://img.youtube.com/vi/yT5R_Q9c7Bg/maxresdefault.jpg)](https://www.youtube.com/watch?v=yT5R_Q9c7Bg)
 
 ## Installation
 
