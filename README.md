@@ -17,7 +17,7 @@ Display the local date, time and MUIS prayer times on an [ESP32 CYD](https://git
 My grandma is getting old and forgetful. Sometimes, she forgets the date and has trouble figuring out the prayer times from the calendar. So I decided to create a prayer times display for her. My original version uses an ESP8266 (Wemos D1 R1) that controls 6 7-segment displays (time and 5 prayers). This improved version uses the ESP32 CYD instead for convenience, since the display and ESP chip are integrated into a single module.
 
     
-## Usage/Examples
+## Usage
 1. Update `wifi_credentials.h` with your WiFi credentials
 ```c
 #define _SSID    "YOUR_WIFI_SSID_HERE"
