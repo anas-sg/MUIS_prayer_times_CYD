@@ -32,6 +32,7 @@
 #define LEDC_BASE_FREQ     5000
 
 TFT_eSPI tft = TFT_eSPI();       // Invoke custom library
+TFT_eSprite sprite = TFT_eSprite(&tft);
 
 enum MUIS_Items {
     FAJR,
@@ -59,40 +60,45 @@ void init_ST7789() {
     ledcAttach(TFT_BL, LEDC_BASE_FREQ, LEDC_TIMER_12_BIT);
     ledcWrite(TFT_BL, 4096 / 32);
     tft.setRotation(2);
-    tft.fillScreen(TFT_BLACK);
-    tft.setTextDatum(TC_DATUM);
     // Add leading space for all prayers
     for (uint8_t i = 0; i < 5; i++) {
         prayers[i][0] = ' ';
     }
+    sprite.setColorDepth(8);
+    sprite.createSprite(tft.width(), tft.height());
+    sprite.fillSprite(TFT_BLACK);
+    sprite.setTextDatum(TC_DATUM);
+    sprite.pushSprite(0, 0);
 }
 
 void display_datetime(void) {
     //time
-    tft.setTextColor(TFT_GREEN, TFT_BLACK, true);
-    tft.setTextFont(7); // Set the text font to font number 2
-    tft.drawString(TIME, tft.width() / 2, TIME_Y_POS);
+    sprite.setTextColor(TFT_GREEN, TFT_BLACK, true);
+    sprite.setTextFont(7); // Set the text font to font number 2
+    sprite.drawString(TIME, tft.width() / 2, TIME_Y_POS);
     //date
-    tft.setTextColor(TFT_WHITE, TFT_BLACK, true);
-    tft.setFreeFont(FSSB18);
-    tft.drawString(DATE, tft.width() / 2, DATE_Y_POS);
+    sprite.setTextColor(TFT_WHITE, TFT_BLACK, true);
+    sprite.setFreeFont(FSSB18);
+    sprite.drawString(DATE, tft.width() / 2, DATE_Y_POS);
     //hijri date
-    tft.setFreeFont(FSS12);
-    tft.drawString(HIJRI, tft.width() / 2, HIJRI_Y_POS);
+    sprite.setFreeFont(FSS12);
+    sprite.drawString(HIJRI, tft.width() / 2, HIJRI_Y_POS);
+    sprite.pushSprite(0, 0);
 }
 
 void display_prayer_times(void) {
     #ifdef DEBUG
     Serial.println("Updating prayer times");
     #endif
-    tft.setFreeFont(FSS24);
+    sprite.setFreeFont(FSS24);
     for (uint8_t i = 0; i < 5; i++) {
         if (is_prayer_now[i])
-            tft.setTextColor(TFT_YELLOW, TFT_BLACK, true);
+            sprite.setTextColor(TFT_YELLOW, TFT_BLACK, true);
         else
-            tft.setTextColor(TFT_WHITE, TFT_BLACK, true);
-        tft.drawString(prayers[i], tft.width() / 2, PRAYER_Y_SPACING * i + FAJR_Y_POS);
+            sprite.setTextColor(TFT_WHITE, TFT_BLACK, true);
+        sprite.drawString(prayers[i], tft.width() / 2, PRAYER_Y_SPACING * i + FAJR_Y_POS);
     }
+    sprite.pushSprite(0, 0);
 }
 
 void update_display(void) {
