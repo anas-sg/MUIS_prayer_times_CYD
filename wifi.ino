@@ -18,6 +18,7 @@ struct tm tm_buf;
 uint16_t year = 0;
 char response[JSON_BUF_SIZE];
 JSONVar json;
+bool LED_status = false;
 
 void init_wifi() {
     WiFi.mode(WIFI_STA);
@@ -29,7 +30,9 @@ void init_wifi() {
     while (WiFi.status() != WL_CONNECTED) {
         yield();
         delay(500);
+        digitalWrite(CYD_LED_BLUE, LED_status = !LED_status);
     }
+    digitalWrite(CYD_LED_BLUE, HIGH);
     #ifdef DEBUG
     Serial.println("");
     Serial.print("Connected to ");
