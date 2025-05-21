@@ -72,6 +72,7 @@ void init_ST7789() {
 }
 
 void display_datetime(void) {
+    sprite.fillRect(0, TIME_Y_POS, tft.width(), FAJR_Y_POS, TFT_BLACK);
     //time
     sprite.setTextColor(TFT_GREEN, TFT_BLACK, true);
     sprite.setTextFont(7); // Set the text font to font number 2
@@ -90,6 +91,7 @@ void display_prayer_times(void) {
     #ifdef DEBUG
     Serial.println("Updating prayer times");
     #endif
+    sprite.fillRect(0, FAJR_Y_POS, tft.width(), tft.height() - FAJR_Y_POS, TFT_BLACK);
     sprite.setFreeFont(FSS24);
     for (uint8_t i = 0; i < 5; i++) {
         if (is_prayer_now[i])
